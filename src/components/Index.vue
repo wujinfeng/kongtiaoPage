@@ -9,7 +9,7 @@
     name: 'Index',
     data() {
       return {
-        msg: '登录成功！' + new Date().toLocaleString()
+        msg: '登录成功！' 
       }
     }
   }

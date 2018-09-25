@@ -3,26 +3,22 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
-
-import UserAdd from '@/components/user/UserAdd'
-import UserList from '@/components/user/UserList'
-import UserRoleList from '@/components/user/UserRoleList'
-
 import Password from '@/components/Password'
 
-import RoleList from '@/components/role/RoleList'
-import RoleAdd from '@/components/role/RoleAdd'
-import RoleAccessList from '@/components/role/RoleAccessList'
+import AirAdd from '@/components/air/AirAdd'
+import AirList from '@/components/air/AirList'
 
-import EleAccessList from '@/components/access/EleAccessList'
-import MenuAccessList from '@/components/access/MenuAccessList'
+import BrandList from '@/components/brand/BrandList'
+import BrandAdd from '@/components/brand/BrandAdd'
 
-import LoginLogList from '@/components/log/LoginLogList'
-import HandleLogList from '@/components/log/HandleLogList'
+import LinkList from '@/components/link/LinkList'
+import LinkAdd from '@/components/link/LinkAdd'
 
-import CouponAdd from '@/components/activity/CouponAdd'
-import CouponList from '@/components/activity/CouponList'
-import CouponUserList from '@/components/activity/CouponUserList'
+import NewsList from '@/components/news/NewsList'
+import NewsAdd from '@/components/news/NewsAdd'
+
+import MessageList from '@/components/message/MessageList'
+import UserList from '@/components/user/UserList'
 
 Vue.use(Router)
 
@@ -36,23 +32,20 @@ let router = new Router({
       component: Main,
       children: [
         {path: 'index', name: 'Index', component: Index},
-        {path: 'UserAdd', name: 'UserAdd', component: UserAdd}, // 用户添加
+        {path: 'AirAdd', name: 'AirAdd', component: AirAdd}, // 空调添加
+        {path: 'AirList', name: 'AirList', component: AirList}, // 空调列表
+
+        {path: 'BrandList', name: 'BrandList', component: BrandList}, // 品牌列表
+        {path: 'BrandAdd', name: 'BrandAdd', component: BrandAdd}, // 品牌添加
+
+        {path: 'LinkList', name: 'LinkList', component: LinkList}, // 链接列表
+        {path: 'LinkAdd', name: 'LinkAdd', component: LinkAdd}, // 链接添加
+
+        {path: 'NewsList', name: 'NewsList', component: NewsList}, // 资讯列表
+        {path: 'NewsAdd', name: 'NewsAdd', component: NewsAdd}, // 资讯添加
+
+        {path: 'MessageList', name: 'MessageList', component: MessageList}, // 留言列表
         {path: 'UserList', name: 'UserList', component: UserList}, // 用户列表
-        {path: 'UserRoleList', name: 'UserRoleList', component: UserRoleList}, // 用户角色
-
-        {path: 'RoleList', name: 'RoleList', component: RoleList}, // 角色列表
-        {path: 'RoleAdd', name: 'RoleAdd', component: RoleAdd}, // 角色添加
-        {path: 'RoleAccessList', name: 'RoleAccessList', component: RoleAccessList}, // 角色权限列表
-
-        {path: 'MenuAccessList', name: 'MenuAccessList', component: MenuAccessList}, // 菜单权限列表
-        {path: 'EleAccessList', name: 'EleAccessList', component: EleAccessList}, // 元素权限列表
-
-        {path: 'LoginLogList', name: 'LoginLogList', component: LoginLogList}, // 登录日志
-        {path: 'HandleLogList', name: 'HandleLogList', component: HandleLogList}, // 操作日志
-
-        {path: 'CouponList', name: 'CouponList', component: CouponList}, // 优惠活动列表
-        {path: 'CouponAdd', name: 'CouponAdd', component: CouponAdd}, // 优惠活动添加
-        {path: 'CouponUserList', name: 'CouponUserList', component: CouponUserList}, // 用户领取优惠
 
         {path: 'Password', name: 'Password', component: Password} // 用户密码
       ]

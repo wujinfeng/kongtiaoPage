@@ -3,16 +3,9 @@
     <el-form-item label="名称" prop="name">
       <el-input v-model="ruleForm.name"></el-input>
     </el-form-item>
-    <el-form-item label="状态" prop="status">
-      <el-select v-model="ruleForm.status">
-        <el-option
-          v-for="item in optionsStatus"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-select>
-    </el-form-item>
+       <el-form-item label="连接地址" prop="link">
+      <el-input v-model="ruleForm.link" placeholder="连接地址"></el-input>
+    </el-form-item> 
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
     </el-form-item>
@@ -27,24 +20,16 @@
         ruleForm: {
           id: '',
           name: '',
-          status: ''
+          link: ''
         },
         rules: {
           name: [
-            {required: true, message: '请输入名称', trigger: 'blur'},
-            {min: 1, max: 30, message: '长度在 1 到 30 个字符', trigger: 'blur'}
+            {required: true, message: '请输入名称', trigger: 'blur'}
           ],
-          status: [
-            {required: true, message: '请选择状态', trigger: 'blur'}
+          link: [
+            {required: true, message: '请输入链接地址', trigger: 'blur'}
           ]
-        },
-        optionsStatus: [{
-          value: 1,
-          label: '启用'
-        }, {
-          value: 5,
-          label: '禁用'
-        }]
+        }
       }
     },
     beforeMount() {
@@ -62,14 +47,14 @@
           if (valid) {
             let form = that.ruleForm
             console.log(form)
-            let url = '/admin/role/add'
+            let url = '/api/link/add'
             if (that.ruleForm.id) {
-              url = '/admin/role/edit'
+              url = '/api/link/edit'
             }
             that.$axios.post(url, form).then(function (res) {
               if (res.status === 200 && res.data.code === 200) {
                 that.$message({type: 'success', message: '保存成功'})
-                that.$router.push({name: 'RoleList'}) // 跳转列表页
+                that.$router.push({name: 'LinkList'}) // 跳转列表页
               } else {
                 that.$message({type: 'error', message: '保存失败'})
               }

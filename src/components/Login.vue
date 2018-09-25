@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card">
-    <p class="title">票务后台管理</p>
+    <p class="title">后台管理</p>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="用户名" prop="mobile">
         <el-input v-model="ruleForm.mobile"></el-input>
@@ -46,7 +46,7 @@
               username: that.ruleForm.mobile,
               password: that.ruleForm.password
             }
-            let url = '/admin/user/login'
+            let url = '/api/user/login'
             that.$axios.post(url, form).then(function (res) {
               if (res.status === 200 && res.data.code === 200) {
                 that.$message({type: 'success', message: '登录成功'})

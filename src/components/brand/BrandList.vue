@@ -1,8 +1,24 @@
 <template>
   <div>
     <el-table :data="tableData">
-      <el-table-column prop="email" label="邮箱"></el-table-column>
+      <el-table-column label="图片">
+        <template slot-scope="scope">
+          <a :href="scope.row.pic" target="_blank">
+            <img :src="scope.row.pic" style="max-width: 100px;height: 50px"/>
+          </a>
+        </template>
+      </el-table-column>
+      <el-table-column prop="name" label="名称"></el-table-column>
+      <el-table-column prop="link" label="链接"></el-table-column>
       <el-table-column prop="ctime" label="创建日期"></el-table-column>
+      <el-table-column width='150' label="操作">
+        <template slot-scope="scope">
+          <router-link :to="{name:'BrandAdd',params:{id: scope.row.id, row: scope.row}}">
+            <el-button type="primary" size="small">编辑</el-button>
+          </router-link>
+           <el-button type="danger" size="small" @click="del(scope.row.id, scope.$index)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -12,18 +28,18 @@
     name: 'UserList',
     data() {
       return {
-        tableData: []
+        tableData: [],
       }
     },
     methods: {
-      del(val, index) {
+          del(val, index) {
         let that = this
         that.$confirm('此操作将永久删除, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          that.$axios.get('/api/user/delete/' + val).then(function (res) {
+          that.$axios.get('/api/brand/delete/' + val).then(function (res) {
             if (res.status === 200 && res.data.code === 200) {
               that.tableData.splice(index, 1)
               that.$message({type: 'success', message: '删除成功!'})
@@ -37,7 +53,8 @@
       },
       query(that, params) {
         console.log(params)
-        that.$axios.get('/api/user/list').then(function (res) {
+        that.$axios.get('/api/brand/list', {params: params}).then(function (res) {
+          console.log(`查询ok`)
           if (res.status === 200 && res.data.code === 200) {
             that.tableData = res.data.data.tableData
           } else {
