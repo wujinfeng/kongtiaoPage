@@ -11,7 +11,7 @@
       <el-table-column prop="name" label="标题"></el-table-column>
       <el-table-column prop="content" label="内容"></el-table-column>
       <el-table-column prop="link" label="链接地址"></el-table-column>
-      <el-table-column prop="ctime" label="创建日期"></el-table-column>
+      <el-table-column prop="ctime" :formatter="formatTime" label="创建日期"></el-table-column>
       <el-table-column width='150' label="操作">
         <template slot-scope="scope">
           <router-link :to="{name:'NewsAdd',params:{id: scope.row.id, row: scope.row}}">
@@ -67,6 +67,9 @@
           console.log(`查询err: ${error}`)
           that.tableData = []
         })
+      },
+      formatTime(row) {
+        return this.$moment(row.ctime).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     mounted() {

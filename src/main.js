@@ -11,6 +11,7 @@ import App from './App'
 import router from './router'
 import DatePicker from '@/components/DatePicker'
 import Pagination from '@/components/Pagination.vue'
+import moment from 'moment'
 
 Vue.use(ElementUI, {size: 'small'})
 
@@ -18,6 +19,7 @@ Vue.component('date-picker', DatePicker)
 Vue.component('pagination', Pagination)
 
 Vue.prototype.$axios = axios
+Vue.prototype.$moment = moment
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

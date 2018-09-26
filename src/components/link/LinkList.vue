@@ -3,7 +3,7 @@
     <el-table :data="tableData">
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="link" label="链接"></el-table-column>
-      <el-table-column prop="ctime" label="创建日期"></el-table-column>
+      <el-table-column prop="ctime" :formatter="formatTime" label="创建日期"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <router-link :to="{name:'LinkAdd',params:{id: scope.row.id, row: scope.row}}">
@@ -21,7 +21,7 @@
     name: 'LinkList',
     data() {
       return {
-        tableData: [],
+        tableData: []
       }
     },
     methods: {
@@ -56,6 +56,9 @@
           console.log(`查询err: ${error}`)
           that.tableData = []
         })
+      },
+      formatTime(row) {
+        return this.$moment(row.ctime).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     mounted() {

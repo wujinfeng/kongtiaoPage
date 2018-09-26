@@ -18,7 +18,7 @@
       <el-table-column prop="phone" label="手机号"></el-table-column>
       <el-table-column prop="email" label="邮箱"></el-table-column>
       <el-table-column prop="status" :formatter="formatStatus" label="状态"></el-table-column>
-      <el-table-column prop="ctime" label="创建日期"></el-table-column>
+      <el-table-column prop="ctime" :formatter="formatTime" label="创建日期"></el-table-column>
       <el-table-column width='150' label="操作">
         <template slot-scope="scope">
           <router-link :to="{name:'UserAdd',params:{id: scope.row.id, row: scope.row}}">
@@ -83,6 +83,9 @@
           that.tableData = []
           that.totalNum = 0
         })
+      },
+      formatTime(row) {
+        return this.$moment(row.ctime).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     mounted() {

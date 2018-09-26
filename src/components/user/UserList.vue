@@ -2,7 +2,7 @@
   <div>
     <el-table :data="tableData">
       <el-table-column prop="email" label="邮箱"></el-table-column>
-      <el-table-column prop="ctime" label="注册日期"></el-table-column>
+      <el-table-column prop="ctime" :formatter="formatTime" label="注册日期"></el-table-column>
     </el-table>
     <pagination v-on:getPageData="getTablePageData" :total-num="totalNum"></pagination>
   </div>
@@ -59,6 +59,9 @@
           that.tableData = []
           that.totalNum = 0
         })
+      },
+      formatTime(row) {
+        return this.$moment(row.ctime).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     mounted() {

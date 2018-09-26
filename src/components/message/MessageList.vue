@@ -3,7 +3,7 @@
     <el-table :data="tableData">
       <el-table-column prop="mobile" label="手机号"></el-table-column>
       <el-table-column prop="message" label="内容"></el-table-column>
-      <el-table-column prop="ctime" label="创建日期"></el-table-column>
+      <el-table-column prop="ctime" :formatter="formatTime" label="创建日期"></el-table-column>
       <el-table-column width='150' label="操作">
         <template slot-scope="scope">
           <el-button type="danger" size="small" @click="del(scope.row.id, scope.$index)">删除</el-button>
@@ -53,6 +53,9 @@
           console.log(`查询err: ${error}`)
           that.tableData = []
         })
+      },
+      formatTime(row) {
+        return this.$moment(row.ctime).format('YYYY-MM-DD HH:mm:ss')
       }
     },
     mounted() {
