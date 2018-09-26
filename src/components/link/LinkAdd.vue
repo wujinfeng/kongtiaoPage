@@ -3,9 +3,9 @@
     <el-form-item label="名称" prop="name">
       <el-input v-model="ruleForm.name"></el-input>
     </el-form-item>
-       <el-form-item label="连接地址" prop="link">
+    <el-form-item label="连接地址" prop="link">
       <el-input v-model="ruleForm.link" placeholder="连接地址"></el-input>
-    </el-form-item> 
+    </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
     </el-form-item>
@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    name: 'RoleAdd',
+    name: 'LinkAdd',
     data() {
       return {
         ruleForm: {

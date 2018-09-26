@@ -1,6 +1,6 @@
 <template>
   <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
-    <el-form-item label="name" prop="name">
+    <el-form-item label="名称" prop="name">
       <el-input v-model="ruleForm.name" placeholder="名称"></el-input>
     </el-form-item>
      <el-form-item label="连接地址" prop="link">
@@ -37,22 +37,6 @@
   export default {
     name: 'BrandAdd',
     data() {
-      var checkUserName = (rule, value, callback) => {
-        let that = this
-        if (!value) {
-          return callback(new Error('不能为空'))
-        }
-        let username = value.toString()
-        that.$axios.get('/admin/user/checkUserName/?pageStatus=' + that.pageStatus + '&username=' + username + '&id=' + that.ruleForm.id).then(function (res) {
-          if (res.status === 200 && res.data.code === 200) {
-            return callback()
-          } else {
-            return callback(new Error(res.data.msg))
-          }
-        }).catch((err) => {
-          return callback(err)
-        })
-      }
       return {
         pageStatus: 'add', // 页面默认添加 add ,edit
         setHeaders: {
@@ -94,14 +78,14 @@
           if (valid) {
             let form = that.ruleForm
             console.log(form)
-            let url = '/api/user/add'
+            let url = '/api/brand/add'
             if (that.pageStatus === 'edit') {
-              url = '/api/user/edit'
+              url = '/api/brand/edit'
             }
             that.$axios.post(url, form).then(function (res) {
               if (res.status === 200 && res.data.code === 200) {
                 that.$message({type: 'success', message: '保存成功'})
-                that.$router.push({name: 'UserList'}) // 跳转列表页
+                that.$router.push({name: 'BrandList'}) // 跳转列表页
               } else {
                 that.$message({type: 'error', message: '添加失败'})
               }

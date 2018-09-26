@@ -2,7 +2,7 @@
   <div>
     <el-table :data="tableData">
       <el-table-column prop="name" label="名称"></el-table-column>
-      <el-table-column prop="status" :formatter="formatStatus" label="状态"></el-table-column>
+      <el-table-column prop="link" label="链接"></el-table-column>
       <el-table-column prop="ctime" label="创建日期"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    name: 'RoleList',
+    name: 'LinkList',
     data() {
       return {
         tableData: [],
@@ -48,7 +48,7 @@
         console.log(params)
         that.$axios.get('/api/link/list', {params: params}).then(function (res) {
           if (res.status === 200 && res.data.code === 200) {
-            that.tableData = res.data.data.tableData
+            that.tableData = res.data.data
           } else {
             that.tableData = []
           }
