@@ -46,8 +46,9 @@
               username: that.ruleForm.mobile,
               password: that.ruleForm.password
             }
-            let url = '/api/user/login'
+            let url = '/api/admin/login'
             that.$axios.post(url, form).then(function (res) {
+              console.log(res)
               if (res.status === 200 && res.data.code === 200) {
                 that.$message({type: 'success', message: '登录成功'})
                 that.$store.commit(types.LOGIN, res.data.data)

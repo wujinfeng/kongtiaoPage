@@ -2,8 +2,9 @@
   <div>
     <el-table :data="tableData">
       <el-table-column prop="email" label="邮箱"></el-table-column>
-      <el-table-column prop="ctime" label="创建日期"></el-table-column>
+      <el-table-column prop="ctime" label="注册日期"></el-table-column>
     </el-table>
+    <pagination v-on:getPageData="getTablePageData" :total-num="totalNum"></pagination>
   </div>
 </template>
 
@@ -12,7 +13,8 @@
     name: 'UserList',
     data() {
       return {
-        tableData: []
+        tableData: [],
+        totalNum: 0
       }
     },
     methods: {
@@ -35,17 +37,27 @@
           that.$message({type: 'info', message: '已取消删除'})
         })
       },
+      getTablePageData(pagerObj) {
+        let params = {
+          currentPage: pagerObj.currentPage,
+          pageSize: pagerObj.pageSize
+        }
+        this.query(this, params)
+      },
       query(that, params) {
         console.log(params)
         that.$axios.get('/api/user/list').then(function (res) {
           if (res.status === 200 && res.data.code === 200) {
             that.tableData = res.data.data.tableData
+            that.totalNum = res.data.data.totalNum
           } else {
             that.tableData = []
+            that.totalNum = 0
           }
         }).catch((error) => {
           console.log(`查询err: ${error}`)
           that.tableData = []
+          that.totalNum = 0
         })
       }
     },

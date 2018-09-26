@@ -39,7 +39,7 @@
               id: that.ruleForm.id,
               password: that.ruleForm.password
             }
-            let url = '/admin/user/password'
+            let url = '/api/admin/password'
             that.$axios.post(url, form).then(function (res) {
               if (res.status === 200 && res.data.code === 200) {
                 that.ruleForm.password = ''

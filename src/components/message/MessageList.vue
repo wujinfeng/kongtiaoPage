@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-table :data="tableData">
-      <el-table-column prop="phone" label="手机号"></el-table-column>
+      <el-table-column prop="mobile" label="手机号"></el-table-column>
       <el-table-column prop="message" label="内容"></el-table-column>
       <el-table-column prop="ctime" label="创建日期"></el-table-column>
       <el-table-column width='150' label="操作">
@@ -45,7 +45,7 @@
         console.log(params)
         that.$axios.get('/api/message/list').then(function (res) {
           if (res.status === 200 && res.data.code === 200) {
-            that.tableData = res.data.data.tableData
+            that.tableData = res.data.data
           } else {
             that.tableData = []
           }
