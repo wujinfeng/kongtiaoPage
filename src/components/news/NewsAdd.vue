@@ -4,7 +4,8 @@
       <el-input v-model="ruleForm.name" placeholder="标题"></el-input>
     </el-form-item>
     <el-form-item label="内容" prop="content">
-      <el-input v-model="ruleForm.content" placeholder="内容"></el-input>
+      <el-input v-model="ruleForm.content" placeholder="内容" type="textarea"
+                :autosize="{ minRows: 4, maxRows: 8}"></el-input>
     </el-form-item>
     <el-form-item label="链接地址" prop="link">
       <el-input v-model="ruleForm.link" placeholder="链接地址"></el-input>
@@ -132,7 +133,6 @@
       },
       beforeUpload(file) {
         console.log('file:')
-        console.log(file)
         // file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/gif'
         let isJPG = (file.type === 'image/jpeg' || file.type === 'image/png')
         let isLtM = file.size / 1024 / 1024 < 10
@@ -151,6 +151,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .el-form {
-    max-width: 450px;
+    max-width: 700px;
   }
 </style>

@@ -26,7 +26,7 @@
 
 <script>
   export default {
-    name: 'UserList',
+    name: 'NewsList',
     data() {
       return {
         username: '',
@@ -42,7 +42,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          that.$axios.get('/api/link/delete/' + val).then(function (res) {
+          that.$axios.get('/api/news/delete/' + val).then(function (res) {
             if (res.status === 200 && res.data.code === 200) {
               that.tableData.splice(index, 1)
               that.$message({type: 'success', message: '删除成功!'})
@@ -56,19 +56,16 @@
       },
       query(that, params) {
         console.log(params)
-        that.$axios.get('/admin/user/list', {params: params}).then(function (res) {
+        that.$axios.get('/api/news/list', {params: params}).then(function (res) {
           console.log(`查询ok`)
           if (res.status === 200 && res.data.code === 200) {
-            that.tableData = res.data.data.tableData
-            that.totalNum = res.data.data.totalNum
+            that.tableData = res.data.data
           } else {
             that.tableData = []
-            that.totalNum = 0
           }
         }).catch((error) => {
           console.log(`查询err: ${error}`)
           that.tableData = []
-          that.totalNum = 0
         })
       }
     },

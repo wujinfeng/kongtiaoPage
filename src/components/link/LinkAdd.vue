@@ -75,6 +75,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .el-form {
-    max-width: 450px;
+    max-width: 600px;
   }
 </style>
