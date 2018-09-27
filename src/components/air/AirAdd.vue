@@ -1,50 +1,104 @@
 <template>
   <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
-    <el-form-item label="用户名" prop="username">
-      <el-input v-model="ruleForm.username" placeholder="用户名"></el-input>
-    </el-form-item>
-    <el-form-item label="密码" prop="password">
-      <el-input v-model="ruleForm.password" type="password" :disabled="setDisabled"></el-input>
-    </el-form-item>
-    <el-form-item label="姓名" prop="name">
-      <el-input v-model="ruleForm.name"></el-input>
-    </el-form-item>
-    <el-form-item label="手机号" prop="phone">
-      <el-input v-model="ruleForm.phone"></el-input>
-    </el-form-item>
-    <el-form-item label="邮箱" prop="email">
-      <el-input v-model="ruleForm.email" type="email"></el-input>
-    </el-form-item>
-    <el-form-item label="状态" prop="status">
-      <el-select v-model="ruleForm.status">
+    <el-form-item label="数据类型" prop="type">
+      <el-select v-model="ruleForm.type">
         <el-option
-          v-for="item in optionsStatus"
+          v-for="item in type_option"
           :key="item.value"
           :label="item.label"
           :value="item.value">
         </el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="头像" prop="avatar">
-      <el-upload
-        class="upload"
-        action="/admin/user/upload"
-        :headers="setHeaders"
-        :on-preview="handlePreview"
-        :on-remove="handleRemoveF"
-        :before-upload="beforeUpload"
-        :on-error="uploadError"
-        :on-success="uploadSuccessF"
-        name="image"
-        :limit=1
-        list-type="picture"
-        :on-exceed="handleExceed"
-        :file-list="fileListF">
-        <el-button size="mini" type="primary">点击上传
-          <i class="el-icon-upload el-icon--right"></i>
-        </el-button>
-        <div slot="tip" class="el-upload__tip">只能上传 jpg, png</div>
-      </el-upload>
+    <el-form-item label="标题" prop="title">
+      <el-input v-model="ruleForm.title"></el-input>
+    </el-form-item>
+    <el-form-item label="名称" prop="name">
+      <el-input v-model="ruleForm.name"></el-input>
+    </el-form-item>
+    <el-form-item label="别称" prop="alias">
+      <el-input v-model="ruleForm.alias"></el-input>
+    </el-form-item>
+    <el-form-item label="型号" prop="model">
+      <el-input v-model="ruleForm.model"></el-input>
+    </el-form-item>
+    <el-form-item label="品牌" prop="brand">
+      <el-input v-model="ruleForm.brand"></el-input>
+    </el-form-item>
+    <el-form-item label="产地" prop="place">
+      <el-input v-model="ruleForm.place"></el-input>
+    </el-form-item>
+    <el-form-item label="产品" prop="product">
+      <el-input v-model="ruleForm.product"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="冷却方式" prop="cooling_mode">
+      <el-input v-model="ruleForm.cooling_mode"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="压缩机" prop="compressor">
+      <el-input v-model="ruleForm.compressor"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1 || ruleForm.type===3" label="机组类别" prop="unit_category">
+      <el-input v-model="ruleForm.unit_category"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1 || ruleForm.type===2" label="用途" prop="purpose">
+      <el-input v-model="ruleForm.purpose"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="制冷量" prop="refrigerating_capacity">
+      <el-input v-model="ruleForm.refrigerating_capacity"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="制热量" prop="heat_production">
+      <el-input v-model="ruleForm.heat_production"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="制冷功率" prop="refrigeration_power">
+      <el-input v-model="ruleForm.refrigeration_power"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="制热功率" prop="thermal_power">
+      <el-input v-model="ruleForm.thermal_power"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="COP" prop="cop">
+      <el-input v-model="ruleForm.cop"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="电压类别" prop="voltage_category">
+      <el-input v-model="ruleForm.voltage_category"></el-input>
+    </el-form-item>
+    <el-form-item label="外形尺寸" prop="shape_size">
+      <el-input v-model="ruleForm.shape_size"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="运输重量" prop="transport_weight">
+      <el-input v-model="ruleForm.transport_weight"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1" label="运行重量" prop="operating_weight">
+      <el-input v-model="ruleForm.operating_weight"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===1 || ruleForm.type===2" label="噪音" prop="noise">
+      <el-input v-model="ruleForm.noise"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===2 || ruleForm.type===3" label="风量" prop="air_volume">
+      <el-input v-model="ruleForm.air_volume"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===2 || ruleForm.type===3" label="供冷量" prop="cooling_capacity">
+      <el-input v-model="ruleForm.cooling_capacity"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===2 || ruleForm.type===3" label="供热量" prop="heat_supply">
+      <el-input v-model="ruleForm.heat_supply"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===2" label="静压" prop="static_pressure">
+      <el-input v-model="ruleForm.static_pressure"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===2 || ruleForm.type===3" label="电机功率" prop="motor_power">
+      <el-input v-model="ruleForm.motor_power"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===2 || ruleForm.type===3" label="重量" prop="weight">
+      <el-input v-model="ruleForm.weight"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===3" label="排管数" prop="tubes_num">
+      <el-input v-model="ruleForm.tubes_num"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===3" label="余压" prop="residual_pressure">
+      <el-input v-model="ruleForm.residual_pressure"></el-input>
+    </el-form-item>
+    <el-form-item v-if="ruleForm.type===3" label="工况" prop="working_condition">
+      <el-input v-model="ruleForm.working_condition"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
@@ -54,74 +108,60 @@
 
 <script>
   export default {
-    name: 'UserAdd',
+    name: 'AirAdd',
     data() {
-      var checkUserName = (rule, value, callback) => {
-        let that = this
-        if (!value) {
-          return callback(new Error('不能为空'))
-        }
-        let username = value.toString()
-        that.$axios.get('/admin/user/checkUserName/?pageStatus=' + that.pageStatus + '&username=' + username + '&id=' + that.ruleForm.id).then(function (res) {
-          if (res.status === 200 && res.data.code === 200) {
-            return callback()
-          } else {
-            return callback(new Error(res.data.msg))
-          }
-        }).catch((err) => {
-          return callback(err)
-        })
-      }
-      var checkPassword = (rule, value, callback) => {
-        let that = this
-        if (that.pageStatus === 'edit') {
-          return callback()
-        }
-        if (!value) {
-          return callback(new Error('密码不能为空'))
-        }
-
-        if (value.length < 8 || value.length > 20) {
-          return callback(new Error('密码长度在 8 - 20 位'))
-        } else {
-          return callback()
-        }
-      }
       return {
         pageStatus: 'add', // 页面默认添加 add ,edit
-        loading: false,
         setHeaders: {
           Authorization: `Bearer ${this.$store.state.token}`
         },
         ruleForm: {
           id: '',
-          username: '',
-          password: '',
-          name: '',
-          status: '',
-          phone: '',
-          avatar: '',
-          email: ''
+          type: 1, // 数据类型
+          title: '', // 标题
+          name: '', // 名称
+          alias: '', // 别称
+          model: '', // 型号
+          brand: '', // 品牌
+          place: '', // 产地
+          product: '', // 产品
+          cooling_mode: '', // 冷却方式
+          compressor: '', // 压缩机
+          unit_category: '', // 机组类别
+          purpose: '', // 用途
+          refrigerating_capacity: '', // 制冷量
+          heat_production: '', // 制热量
+          refrigeration_power: '', // 制冷功率
+          thermal_power: '', // 制热功率
+          cop: '', // COP
+          voltage_category: '', // 电压类别
+          shape_size: '', // 外形尺寸
+          transport_weight: '', // 运输重量
+          operating_weight: '', // 运行重量
+          noise: '', // 噪音
+          air_volume: '', // 风量
+          cooling_capacity: '', // 供冷量
+          heat_supply: '', // 供热量
+          static_pressure: '', // 静压
+          motor_power: '', // 电机功率
+          weight: '', // 重量
+          tubes_num: '', // 排管数
+          residual_pressure: '', // 余压
+          working_condition: '' // 工况
         },
-        rules: {
-          username: [{required: true, message: '请输入用户名', trigger: 'blur'},
-            {validator: checkUserName, trigger: 'blur'}
-          ],
-          phone: [{required: true, message: '请输入手机号', trigger: 'blur'}],
-          password: [{validator: checkPassword, trigger: 'blur'}],
-          name: [{required: true, message: '请输入名称', trigger: 'blur'}],
-          status: [{required: true, message: '请选择状态', trigger: 'blur'}],
-          email: [{required: true, message: '请选择邮箱', trigger: 'blur'}]
-        },
-        fileListF: [],
-        setDisabled: false,
-        optionsStatus: [{
-          value: 1,
-          label: '可用'
-        }, {
-          value: 2,
-          label: '禁用'
-        }]
+        rules: {},
+        type_option: [
+          {
+            value: 1,
+            label: '主机'
+          }, {
+            value: 2,
+            label: '风机盘管'
+          }, {
+            value: 3,
+            label: '空气处理机组'
+          }
+        ]
       }
     },
     beforeMount() {
@@ -134,9 +174,6 @@
         that.pageStatus = 'edit'
         that.setDisabled = true
         that.ruleForm = row
-        if (row.avatar) {
-          that.fileListF = [{name: row.avatar, url: row.avatar}]
-        }
       }
     },
     methods: {
@@ -146,14 +183,14 @@
           if (valid) {
             let form = that.ruleForm
             console.log(form)
-            let url = '/admin/user/add'
+            let url = '/api/air/add'
             if (that.pageStatus === 'edit') {
-              url = '/admin/user/edit'
+              url = '/api/air/edit'
             }
             that.$axios.post(url, form).then(function (res) {
               if (res.status === 200 && res.data.code === 200) {
                 that.$message({type: 'success', message: '保存成功'})
-                that.$router.push({name: 'UserList'}) // 跳转列表页
+                that.$router.push({name: 'AirList'}) // 跳转列表页
               } else {
                 that.$message({type: 'error', message: '添加失败'})
               }
